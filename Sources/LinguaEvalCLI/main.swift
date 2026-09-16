@@ -1,6 +1,10 @@
 import Foundation
 import LinguaCore
 
+enum CLIError: Error {
+    case usage
+}
+
 @main
 struct LinguaEvalCLI {
     static func main() throws {
@@ -9,7 +13,7 @@ struct LinguaEvalCLI {
             FileHandle.standardError.write(
                 Data("Usage: lingua-eval <evaluation-cases.json>\n".utf8)
             )
-            Foundation.exit(2)
+            throw CLIError.usage
         }
 
         let url = URL(fileURLWithPath: arguments[1])
