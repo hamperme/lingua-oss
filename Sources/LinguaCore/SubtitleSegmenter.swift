@@ -60,7 +60,7 @@ public struct SubtitleSegmenter: Sendable {
             }
         }
 
-        return cues.map(applyingMinimumDuration)
+        return applyingMinimumDurations(to: cues)
     }
 
     private func append(_ cue: SubtitleCue, to cues: inout [SubtitleCue]) {
@@ -86,11 +86,20 @@ public struct SubtitleSegmenter: Sendable {
         }
     }
 
-    private func applyingMinimumDuration(_ cue: SubtitleCue) -> SubtitleCue {
-        guard cue.duration < policy.minimumDuration else { return cue }
-        var copy = cue
-        copy.end = cue.start + policy.minimumDuration
-        return copy
+    private func applyingMinimumDurations(to cues: [SubtitleCue]) -> [SubtitleCue] {
+        guard !cues.isEmpty else { return [] }
+
+        var result = cues
+        for index in result.indices where result[index].duration < policy.minimumDuration {
+            let desiredEnd = result[index].start + policy.minimumDuration
+            if index < result.index(before: result.endIndex) {
+                let nextStart = result[result.index(after: index)].start
+                result[index].end = max(result[index].end, min(desiredEnd, nextStart))
+            } else {
+                result[index].end = max(result[index].end, desiredEnd)
+            }
+        }
+        return result
     }
 
     private func splitText(_ text: String, maximumCharacters: Int) -> [String] {
