@@ -1,0 +1,20 @@
+[
+  {
+    "id": "exact-en",
+    "reference": "please close the window",
+    "candidate": "please close the window",
+    "latencyMilliseconds": 420
+  },
+  {
+    "id": "minor-omission-en",
+    "reference": "the meeting starts at nine tomorrow morning",
+    "candidate": "the meeting starts at nine tomorrow",
+    "latencyMilliseconds": 510
+  },
+  {
+    "id": "punctuation-normalization-es",
+    "reference": "buenos días cómo estás",
+    "candidate": "Buenos días, cómo estás?",
+    "latencyMilliseconds": 465
+  }
+]
