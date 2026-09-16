@@ -1,0 +1,6 @@
+Lingua OSS
+Copyright 2026 hamperme
+
+This product includes software developed for the Lingua OSS project.
+
+The current public Swift package has no required third-party runtime dependencies beyond platform/system libraries. Optional provider adapters added in the future must preserve applicable upstream license and NOTICE obligations.
