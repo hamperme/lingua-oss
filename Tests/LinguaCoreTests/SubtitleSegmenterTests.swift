@@ -40,8 +40,8 @@ final class SubtitleSegmenterTests: XCTestCase {
         let cues = segmenter.segment(transcript)
         XCTAssertGreaterThan(cues.count, 1)
         XCTAssertTrue(cues.allSatisfy { $0.sourceText.count <= 18 })
-        XCTAssertEqual(cues.first?.start, 0, accuracy: 0.001)
-        XCTAssertEqual(cues.last?.end, 4, accuracy: 0.001)
+        XCTAssertEqual(cues.first!.start, 0, accuracy: 0.001)
+        XCTAssertEqual(cues.last!.end, 4, accuracy: 0.001)
     }
 
     func testIgnoresPartialAndEmptySegments() {
