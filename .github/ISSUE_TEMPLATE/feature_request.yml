@@ -1,0 +1,28 @@
+name: Feature request
+description: Propose a reusable improvement to Lingua OSS
+title: "[Feature] "
+body:
+  - type: textarea
+    id: usecase
+    attributes:
+      label: Use case
+      description: What interpretation, subtitle, evaluation, or maintainer problem should this solve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed approach
+      description: Describe the smallest reusable change that would help.
+    validations:
+      required: true
+  - type: textarea
+    id: evaluation
+    attributes:
+      label: How should we evaluate it?
+      description: Suggest tests, fixtures, or measurable success criteria.
+  - type: textarea
+    id: privacy
+    attributes:
+      label: Privacy / network considerations
+      description: Note any off-device data transfer, credential requirements, or dataset licensing concerns.
