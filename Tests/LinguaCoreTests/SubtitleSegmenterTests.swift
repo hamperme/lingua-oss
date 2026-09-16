@@ -44,6 +44,28 @@ final class SubtitleSegmenterTests: XCTestCase {
         XCTAssertEqual(cues.last!.end, 4, accuracy: 0.001)
     }
 
+    func testMinimumDurationDoesNotOverlapNextCue() {
+        let segmenter = SubtitleSegmenter(
+            policy: .init(
+                maximumCharacters: 42,
+                maximumDuration: 6,
+                minimumDuration: 1.0,
+                mergeGapThreshold: 0.01
+            )
+        )
+
+        let transcript = [
+            TranscriptSegment(start: 0, end: 0.2, text: "first"),
+            TranscriptSegment(start: 0.25, end: 0.45, text: "second")
+        ]
+
+        let cues = segmenter.segment(transcript)
+        XCTAssertEqual(cues.count, 2)
+        XCTAssertLessThanOrEqual(cues[0].end, cues[1].start)
+        XCTAssertEqual(cues[0].end, 0.25, accuracy: 0.001)
+        XCTAssertEqual(cues[1].end, 1.25, accuracy: 0.001)
+    }
+
     func testIgnoresPartialAndEmptySegments() {
         let segmenter = SubtitleSegmenter()
         let transcript = [
